@@ -81,11 +81,43 @@ def make_filename(filename_entity):
     return attribute.misp_xml
 
 
+def sha256(hash):
+    hs='2c740d20dab7f14ec30510a11f8fd78b82bc3a711abe8a993acdb323e78e6d5e'
+    if len(hash)==len(hs) and hash.isdigit()==False and hash.isalpha()==False and hash.isalnum()==True:
+        return True
+    else:
+        return False
+
+
+def sha1(hash):
+    hs='4a1d4dbc1e193ec3ab2e9213876ceb8f4db72333'
+    if len(hash)==len(hs) and hash.isdigit()==False and hash.isalpha()==False and hash.isalnum()==True:
+        return True
+    else:
+        return False
+
+
+def md5(hash):
+    hs='ae11fd697ec92c7c98de3fac23aba525'
+    if len(hash)==len(hs) and hash.isdigit()==False and hash.isalpha()==False and hash.isalnum()==True:
+        return True
+    else:
+        return False
+
+
 def make_hash(hash_entity):
     hash_ = hash_entity.xpath(".//mtg:Properties/mtg:Property[@displayName='Hash']/mtg:Value/text()", namespaces={'mtg': NS_MTG})[0]
     text = node.xpath(".//mtg:Notes/text()", namespaces={'mtg': NS_MTG})
     comment = "Suspicious hash from maltego" if len(text) == 0 else text[0]
-    attribute = Attribute("md5", "External analysis", CURRENT_TIMESTAMP, comment, hash_)
+    if sha256(hash_):
+        hash_type = "sha256"
+    elif sha1(hash_):
+        hash_type = "sha1"
+    elif md5(hash_):
+        hash_type = "md5"
+    else:
+        return None
+    attribute = Attribute(hash_type, "External analysis", CURRENT_TIMESTAMP, comment, hash_)
     return attribute.misp_xml
 
 
@@ -113,7 +145,8 @@ for node in nodes:
     for entity in mtg_entities:
         #try:
         new_entity = convert_entity[entity.attrib["type"]](entity)
-        misp_entities.append(new_entity)
+        if new_entity is not None:
+            misp_entities.append(new_entity)
         #except:
         #    pass
 
