@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from lxml import etree
 from lxml.builder import E
 import zipfile
@@ -7,8 +8,9 @@ import pdb
 import time
 from datetime import date
 
-MISP_URL = "https://54.76.164.83"
-API_KEY = "6180Chk5oIKak0dKZDqmCodjR0IuLruStCT5Tdbi"
+MISP_URL = "http(s)://yourmisp.com"
+API_KEY = "y0uR@p1K3y"
+ORG = "Your Organisation"
 
 file_ = sys.argv[1]
 zp = zipfile.ZipFile(file_)
@@ -121,7 +123,7 @@ today = date.today().strftime("%Y-%m-%d")
 
 misp_event = E.Event(
     E.id(),
-    E.org("BAE AI"),
+    E.org(ORG),
     E.date(today),
     E.threat_level_id("4"),
     E.info("Imported graph elements from maltego"),
@@ -132,7 +134,7 @@ misp_event = E.Event(
     E.timestamp(str(time.time())),
     E.distribution("0"),
     E.proposal_email_lock("0"),
-    E.orgc("BAE AI"),
+    E.orgc(ORG),
     E.locked("0"),
     E.publish_timestamp(),
     E.ShadowAttribute(),
