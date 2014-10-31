@@ -82,24 +82,24 @@ def make_filename(filename_entity):
 
 
 def sha256(hash):
-    hs='2c740d20dab7f14ec30510a11f8fd78b82bc3a711abe8a993acdb323e78e6d5e'
-    if len(hash)==len(hs) and hash.isdigit()==False and hash.isalpha()==False and hash.isalnum()==True:
+    hs = '2c740d20dab7f14ec30510a11f8fd78b82bc3a711abe8a993acdb323e78e6d5e'
+    if len(hash) == len(hs) and hash.isdigit() is False and hash.isalpha() is False and hash.isalnum() is True:
         return True
     else:
         return False
 
 
 def sha1(hash):
-    hs='4a1d4dbc1e193ec3ab2e9213876ceb8f4db72333'
-    if len(hash)==len(hs) and hash.isdigit()==False and hash.isalpha()==False and hash.isalnum()==True:
+    hs = '4a1d4dbc1e193ec3ab2e9213876ceb8f4db72333'
+    if len(hash) == len(hs) and hash.isdigit() is False and hash.isalpha() is False and hash.isalnum() is True:
         return True
     else:
         return False
 
 
 def md5(hash):
-    hs='ae11fd697ec92c7c98de3fac23aba525'
-    if len(hash)==len(hs) and hash.isdigit()==False and hash.isalpha()==False and hash.isalnum()==True:
+    hs = 'ae11fd697ec92c7c98de3fac23aba525'
+    if len(hash) is len(hs) and hash.isdigit() is False and hash.isalpha() is False and hash.isalnum() is True:
         return True
     else:
         return False

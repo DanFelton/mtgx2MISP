@@ -1,5 +1,6 @@
 #!/bin/sh
-for f in files_to_gobble/*.mtgx;
-do
-    ../mtgx2MISP.py f
-done
+inotifywait -m files_to_gobble -e create |
+    while read path action file; do
+        ../mtgx2MISP.py files_to_gobble/$file
+        mv files_to_gobble/$file gobbled_files/
+    done
