@@ -143,12 +143,12 @@ misp_entities = []
 for node in nodes:
     mtg_entities = node.findall('.//{%s}MaltegoEntity' % NS_MTG)
     for entity in mtg_entities:
-        #try:
-        new_entity = convert_entity[entity.attrib["type"]](entity)
-        if new_entity is not None:
-            misp_entities.append(new_entity)
-        #except:
-        #    pass
+        try:
+            new_entity = convert_entity[entity.attrib["type"]](entity)
+            if new_entity is not None:
+                misp_entities.append(new_entity)
+        except:
+            pass
 
 
 misp = MISPServer(MISP_URL, API_KEY)
